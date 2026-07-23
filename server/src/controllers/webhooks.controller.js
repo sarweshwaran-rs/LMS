@@ -25,7 +25,8 @@ export const clerkWebhooks = async (request, response) => {
         };
 
         await User.create(userData);
-        response.status(201).json({ success: true });
+        console.log("{ success: true }")
+        response.json({});
         break;
       }
 
@@ -36,13 +37,15 @@ export const clerkWebhooks = async (request, response) => {
           imageUrl: data.image_url,
         };
         await User.findByIdAndUpdate(data.id, userData);
-        response.status(202).json({ success: true });
+        console.log("{ success: true }")
+        response.json({});
         break;
       }
 
       case "user.deleted": {
         await User.findByIdAndDelete(data.id);
-        response.status(200).json({ success: true });
+        console.log("{ success: true }")
+        response.json({});
         break;
       }
 
@@ -54,6 +57,6 @@ export const clerkWebhooks = async (request, response) => {
       }
     }
   } catch (error) {
-    response.status(400).json({ success: false, message: error.message });
+    response.json({ success: false, message: error.message });
   }
 };
