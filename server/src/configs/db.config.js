@@ -13,12 +13,7 @@ export const connectDB = async () => {
 
   try {
     mongoose.connection.on('connected', () => console.info("Connected to Mongo DB Successfully"))
-    await mongoose.connect(`${uri}/lms`, {
-      appName:"lms",
-      maxPoolSize: 10,
-      serverSelectionTimeoutMS: 5000,
-      socketTimeoutMS: 45000
-    });
+    await mongoose.connect(`${uri}/lms`);
   } catch (error) {
     console.error("Error Occurred when connecting to Mongodb: ", error);
     process.exit(1);
