@@ -16,6 +16,6 @@ app.get("/", (request, response) => {
   response.status(200).send("API Working!");
 });
 
-app.use("/auth", authRouter);
+app.use("/", authRouter);
 
 export default app;
