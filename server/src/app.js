@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import authRouter from "./routes/auth.route.js";
+import { clerkWebhooks } from "./controllers/webhooks.controller.js";
 
 // Initialize Express
 const app = express();
@@ -16,6 +16,6 @@ app.get("/", (request, response) => {
   response.status(200).send("API Working!");
 });
 
-app.use("/", authRouter);
+app.post("/clerk", express.json(), clerkWebhooks);
 
 export default app;
