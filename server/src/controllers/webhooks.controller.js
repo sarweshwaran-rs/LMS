@@ -31,8 +31,7 @@ export const clerkWebhooks = async (request, response) => {
 
         console.log("Saved user:", user);
 
-        response.json({});
-        break;
+        return response.status(200).json({ success: true });
       }
 
       case "user.updated": {
