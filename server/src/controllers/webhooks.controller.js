@@ -7,7 +7,7 @@ export const clerkWebhooks = async (request, response) => {
   try {
     console.log("Webhook Received")
     const whook = new Webhook(`${env.clerk.webhook_secret}`);
-    console.log(`Secret From ENV: ${env.clerk.webhook_secret}`);
+
     await whook.verify(JSON.stringify(request.body), {
       "svix-id": request.headers["svix-id"],
       "svix-timestamp": request.headers["svix-timestamp"],
@@ -25,13 +25,9 @@ export const clerkWebhooks = async (request, response) => {
           imageUrl: data.image_url,
         }
 
-        console.log("Creating user:", userData);
-
         const user = await User.create(userData);
 
-        console.log("Saved user:", user);
-
-        return response.status(200).json({ success: true });
+        return response.status(201).json({ success: true, message: `User ${user.name} successfully Created` });
       }
 
       case "user.updated": {
@@ -41,13 +37,13 @@ export const clerkWebhooks = async (request, response) => {
           imageUrl: data.image_url,
         }
         await User.findByIdAndUpdate(data.id, userData)
-        response.json({})
+        response.status(200).json({success: true, message: `User ${userData.name} successfully updated`})
         break;
       }
 
       case "user.deleted": {
         await User.findByIdAndDelete(data.id)
-        response.json({})
+        response.status(200).json({success: true, message: "Successfully Deleted"})
         break;
       }
 
