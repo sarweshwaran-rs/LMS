@@ -5,7 +5,6 @@ import { env } from "../configs/env.config.js";
 // API Controller Function to Manage Clerk User with database
 export const clerkWebhooks = async (request, response) => {
   try {
-    console.log("Webhook Received")
     const whook = new Webhook(`${env.clerk.webhook_secret}`);
 
     await whook.verify(JSON.stringify(request.body), {
