@@ -7,13 +7,13 @@ export const clerkWebhooks = async (request, response) => {
   try {
     console.log("Webhook Received")
     const whook = new Webhook(env.clerk.webhook_secret);
-
+    console.log(`Secret: ${env.clerk.webhook_secret}`);
     await whook.verify(JSON.stringify(request.body), {
       "svix-id": request.headers["svix-id"],
       "svix-timestamp": request.headers["svix-timestamp"],
       "svix-signature": request.headers["svix-signature"],
     });
-
+    
     const { data, type } = request.body;
 
     switch (type) {
