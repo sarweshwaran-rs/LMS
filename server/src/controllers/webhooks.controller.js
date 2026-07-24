@@ -1,4 +1,3 @@
-import "dotenv/config"
 import { Webhook } from "svix";
 import User from "../models/user.model.js";
 import { env } from "../configs/env.config.js";
@@ -7,8 +6,7 @@ import { env } from "../configs/env.config.js";
 export const clerkWebhooks = async (request, response) => {
   try {
     console.log("Webhook Received")
-    const whook = new Webhook(env.clerk.webhook_secret);
-    console.log(`Secret from env: ${process.env.CLERK_WEBHOOK_SECRET}`)
+    const whook = new Webhook(`${env.clerk.webhook_secret}`);
     console.log(`Secret From ENV: ${env.clerk.webhook_secret}`);
     await whook.verify(JSON.stringify(request.body), {
       "svix-id": request.headers["svix-id"],
