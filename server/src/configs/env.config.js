@@ -11,6 +11,7 @@ export const env = {
 
   clerk: {
     webhook_secret: process.env.CLERK_WEBHOOK_SECRET,
+    secret_key: process.env.CLERK_SECRET_KEY,
   },
 
   cloudinary: {

@@ -11,7 +11,6 @@ export const getUserData = async (request, response) => {
   try {
     const { userId } = getAuth(request);
     const user = await User.findById(userId);
-
     if (!user) {
       return response
         .status(404)
